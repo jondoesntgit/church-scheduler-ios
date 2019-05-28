@@ -50,6 +50,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     var eventList = EventList()
     var thisDaysEvents = [Event]()
     var dates = [Date]()
+    var activeDate = Date().roundedToDay()
     
     
     // Mark: - Collection View
@@ -69,7 +70,9 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         if let calendarDayView = cell as? CalendarDayView {
             let index = indexPath.item
             calendarDayView.delegate = self
-            calendarDayView.date = dates[index]
+            let date = dates[index].roundedToDay()
+            calendarDayView.date = date
+            calendarDayView.numberOfEvents = eventList.getEventsSameDayAs(date).count
         }
         return cell
     }
@@ -96,9 +99,10 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func setActiveDate(_ date: Date) {
+        activeDate = date.roundedToDay()
         thisDaysEvents = eventList.getEventsSameDayAs(date)
-        print(date)
         eventTableView.reloadData()
+        calendarView.setActiveCellByDate(date)
     }
     
     // MARK: - TableView
@@ -124,6 +128,9 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         return cell
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        setActiveDate(activeDate)
+    }
     
     /*
     // MARK: - Navigation
@@ -135,4 +142,11 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     */
 
+}
+
+extension Date {
+    func roundedToDay() -> Date {
+        let dayComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
+        return Calendar.current.date(from: dayComponents)!
+    }
 }

@@ -9,5 +9,19 @@
 import UIKit
 
 class CalendarView: UICollectionView {
-
+    
+    var activeCell : CalendarDayView?
+    
+    func setActiveCellByDate(_ date: Date) {
+        activeCell?.isActive = false
+        for cell in visibleCells {
+            if let calendarCell = cell as? CalendarDayView {
+                if calendarCell.date == date {
+                    activeCell = calendarCell
+                    activeCell!.isActive = true
+                    return
+                }
+            }
+        }
+    }
 }

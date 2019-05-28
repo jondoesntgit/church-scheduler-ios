@@ -39,26 +39,41 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drA-A1-MWC">
-                                                    <rect key="frame" x="0.0" y="5" width="50" height="21"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="20.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQp-EB-DsS" customClass="CalendarDayViewEventDotsView" customModule="ChurchScheduler" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="20.5" width="50" height="29.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="numberOfEvents">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="drA-A1-MWC" secondAttribute="trailing" id="YtQ-Oj-aez"/>
-                                            <constraint firstItem="drA-A1-MWC" firstAttribute="top" secondItem="7N9-ky-3X2" secondAttribute="top" constant="5" id="fxw-hd-boR"/>
-                                            <constraint firstItem="drA-A1-MWC" firstAttribute="leading" secondItem="7N9-ky-3X2" secondAttribute="leading" id="k6T-bU-bsG"/>
+                                            <constraint firstItem="drA-A1-MWC" firstAttribute="top" secondItem="7N9-ky-3X2" secondAttribute="top" id="3o7-Qd-DXo"/>
+                                            <constraint firstItem="drA-A1-MWC" firstAttribute="leading" secondItem="7N9-ky-3X2" secondAttribute="leading" id="9Sf-GT-n5p"/>
+                                            <constraint firstItem="CQp-EB-DsS" firstAttribute="top" secondItem="drA-A1-MWC" secondAttribute="bottom" id="ANu-im-zqO"/>
+                                            <constraint firstAttribute="trailing" secondItem="drA-A1-MWC" secondAttribute="trailing" id="BQP-tE-RbM"/>
+                                            <constraint firstAttribute="trailing" secondItem="CQp-EB-DsS" secondAttribute="trailing" id="eab-Io-gb3"/>
+                                            <constraint firstItem="CQp-EB-DsS" firstAttribute="leading" secondItem="7N9-ky-3X2" secondAttribute="leading" id="lbT-TS-DyP"/>
+                                            <constraint firstAttribute="bottom" secondItem="CQp-EB-DsS" secondAttribute="bottom" id="sTx-sN-6xo"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="dateLabel" destination="drA-A1-MWC" id="deG-S3-02J"/>
+                                            <outlet property="eventDotsView" destination="CQp-EB-DsS" id="k1h-6z-fRI"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NOb-L5-9b5">
-                                <rect key="frame" x="0.0" y="331.5" width="414" height="530.5"/>
+                                <rect key="frame" x="0.0" y="291.5" width="414" height="570.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Event Row" id="cc5-YZ-Vo0">
@@ -75,7 +90,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NOb-L5-9b5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2h3-lf-GZg"/>
-                            <constraint firstItem="NOb-L5-9b5" firstAttribute="top" secondItem="lQ5-fB-ePZ" secondAttribute="bottom" constant="40" id="3bp-xM-BJa"/>
+                            <constraint firstItem="NOb-L5-9b5" firstAttribute="top" secondItem="lQ5-fB-ePZ" secondAttribute="bottom" id="3bp-xM-BJa"/>
                             <constraint firstItem="NOb-L5-9b5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="8N0-YG-f8K"/>
                             <constraint firstItem="lQ5-fB-ePZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="O1h-oT-IWE"/>
                             <constraint firstItem="lQ5-fB-ePZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="a9r-V1-V4F"/>
@@ -91,7 +106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="40.799999999999997" y="26.53673163418291"/>
+            <point key="canvasLocation" x="40.579710144927539" y="26.116071428571427"/>
         </scene>
     </scenes>
 </document>
