@@ -22,7 +22,8 @@ class EventList {
     }
     
     func getEventsSameDayAs(_ date: Date) -> [Event] {
-        let eventDay = date
+        let eventDayComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        let eventDay = Calendar.current.date(from: eventDayComponents)!
         return events[eventDay] ?? []
     }
     

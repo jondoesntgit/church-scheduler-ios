@@ -22,6 +22,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         eventList.add(event2)
         eventList.add(event3)
         
+        setActiveDate(Date())
+        
         // Get current month
         let nowComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         var firstDayOfCurrentMonth = nowComponents
@@ -45,6 +47,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     // Mark: - Model
     
     var eventList = EventList()
+    var thisDaysEvents = [Event]()
     var dates = [Date]()
     
     
@@ -92,7 +95,9 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func setActiveDate(_ date: Date) {
+        thisDaysEvents = eventList.getEventsSameDayAs(date)
         print(date)
+        eventTableView.reloadData()
     }
     
     // MARK: - TableView
@@ -106,14 +111,15 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return thisDaysEvents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let row = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: "Event Row", for: indexPath)
-        cell.textLabel?.text = "Sabbath School \(row)"
+        let event = thisDaysEvents[row]
+        cell.textLabel?.text = event.name
         return cell
     }
     
