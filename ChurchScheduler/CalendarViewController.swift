@@ -17,10 +17,16 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         let event1 = Event(name: "Vespers")
         let event2 = Event(name: "Sabbath School")
         let event3 = Event(name: "Church")
+        let event4 = Event(name: "Show the TA")
+        
+        event1.startTime = Date(year: 2019, month: 5, day: 31)
+        event2.startTime = Date(year: 2019, month: 6, day: 1)
+        event3.startTime = Date(year: 2019, month: 6, day: 1)
         
         eventList.add(event1)
         eventList.add(event2)
         eventList.add(event3)
+        eventList.add(event4)
         
         setActiveDate(Date())
         
@@ -148,5 +154,10 @@ extension Date {
     func roundedToDay() -> Date {
         let dayComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
         return Calendar.current.date(from: dayComponents)!
+    }
+    
+    init(year: Int, month: Int, day: Int) {
+        let dayComponents = DateComponents(year: year, month: month, day: day)
+        self = Calendar.current.date(from: dayComponents)!
     }
 }
