@@ -36,7 +36,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         let numberOfDaysToDisplay = 6 * 7 // 42
         for _ in 1...numberOfDaysToDisplay {
-            let dateForView = Calendar.current.component(.day, from: workingDate)
+            // TODO: Cleanup if this turns out not to be necessary
+            //let dateForView = Calendar.current.component(.day, from: workingDate)
             //dates.append(dateForView)
             dates.append(workingDate)
             workingDate.addTimeInterval(86400)
