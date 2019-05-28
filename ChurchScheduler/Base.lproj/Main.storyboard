@@ -1,24 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Calendar View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CalendarViewController" customModule="ChurchScheduler" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lQ5-fB-ePZ" customClass="CalendarView" customModule="ChurchScheduler" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="247.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lQ5-fB-ePZ" secondAttribute="height" multiplier="375:224" id="2pa-Dl-LKn"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6Wb-yn-PT1">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Day View Cell" id="7N9-ky-3X2" customClass="CalendarDayView" customModule="ChurchScheduler" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drA-A1-MWC">
+                                                    <rect key="frame" x="0.0" y="5" width="50" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="drA-A1-MWC" secondAttribute="trailing" id="YtQ-Oj-aez"/>
+                                            <constraint firstItem="drA-A1-MWC" firstAttribute="top" secondItem="7N9-ky-3X2" secondAttribute="top" constant="5" id="fxw-hd-boR"/>
+                                            <constraint firstItem="drA-A1-MWC" firstAttribute="leading" secondItem="7N9-ky-3X2" secondAttribute="leading" id="k6T-bU-bsG"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="drA-A1-MWC" id="deG-S3-02J"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NOb-L5-9b5">
+                                <rect key="frame" x="0.0" y="331.5" width="414" height="530.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Event Row" id="cc5-YZ-Vo0">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cc5-YZ-Vo0" id="Wh8-Oz-BAa">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NOb-L5-9b5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2h3-lf-GZg"/>
+                            <constraint firstItem="NOb-L5-9b5" firstAttribute="top" secondItem="lQ5-fB-ePZ" secondAttribute="bottom" constant="40" id="3bp-xM-BJa"/>
+                            <constraint firstItem="NOb-L5-9b5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="8N0-YG-f8K"/>
+                            <constraint firstItem="lQ5-fB-ePZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="O1h-oT-IWE"/>
+                            <constraint firstItem="lQ5-fB-ePZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="a9r-V1-V4F"/>
+                            <constraint firstItem="lQ5-fB-ePZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cVF-zF-OAk"/>
+                            <constraint firstItem="NOb-L5-9b5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="oTj-Ii-7Tt"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="calendarView" destination="lQ5-fB-ePZ" id="whd-2j-oSu"/>
+                        <outlet property="eventTableView" destination="NOb-L5-9b5" id="NV5-QE-3jf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="40.799999999999997" y="26.53673163418291"/>
         </scene>
     </scenes>
 </document>
