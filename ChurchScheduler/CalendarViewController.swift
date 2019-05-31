@@ -138,16 +138,32 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         setActiveDate(activeDate)
     }
     
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    //In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier! == "Show Event Details" {
+            if let eventInspector = segue.destination.contents as? EventInspector {
+                if let cell = sender as? UITableViewCell, let indexPath = eventTableView.indexPath(for: cell) {
+                    let event = thisDaysEvents[indexPath.row]
+                    eventInspector.event = event
+                    eventInspector.title = event.name
+                }
+            }
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+}
 
+extension UIViewController {
+    var contents: UIViewController {
+        if let navcon = self as? UINavigationController {
+            return navcon.visibleViewController ?? navcon
+        } else {
+            return self
+        }
+    }
 }
 
 extension Date {

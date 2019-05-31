@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1370AECD229DE1FB00B33B64 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1370AECC229DE1FB00B33B64 /* CalendarView.swift */; };
+		1370AECF229DE96C00B33B64 /* EventInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1370AECE229DE96C00B33B64 /* EventInspector.swift */; };
+		1370AED1229DEE8400B33B64 /* EventPropertyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1370AED0229DEE8400B33B64 /* EventPropertyTableViewCell.swift */; };
 		5059E5F2229CC7670089E3E7 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5059E5F1229CC7670089E3E7 /* EventList.swift */; };
 		5059E5F4229CC7A90089E3E7 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5059E5F3229CC7A80089E3E7 /* Event.swift */; };
 		507BBF902298C2D7000FE12E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507BBF8F2298C2D7000FE12E /* AppDelegate.swift */; };
@@ -21,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		1370AECC229DE1FB00B33B64 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		1370AECE229DE96C00B33B64 /* EventInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInspector.swift; sourceTree = "<group>"; };
+		1370AED0229DEE8400B33B64 /* EventPropertyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPropertyTableViewCell.swift; sourceTree = "<group>"; };
 		5059E5F1229CC7670089E3E7 /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 		5059E5F3229CC7A80089E3E7 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		507BBF8C2298C2D6000FE12E /* ChurchScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChurchScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +75,8 @@
 				5059E5F1229CC7670089E3E7 /* EventList.swift */,
 				5059E5F3229CC7A80089E3E7 /* Event.swift */,
 				507BBF932298C2D7000FE12E /* Main.storyboard */,
+				1370AECE229DE96C00B33B64 /* EventInspector.swift */,
+				1370AED0229DEE8400B33B64 /* EventPropertyTableViewCell.swift */,
 				507BBF962298C2DA000FE12E /* Assets.xcassets */,
 				507BBF982298C2DA000FE12E /* LaunchScreen.storyboard */,
 				507BBFA52298CE84000FE12E /* Grid.swift */,
@@ -150,6 +156,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1370AECF229DE96C00B33B64 /* EventInspector.swift in Sources */,
+				1370AED1229DEE8400B33B64 /* EventPropertyTableViewCell.swift in Sources */,
 				5059E5F4229CC7A90089E3E7 /* Event.swift in Sources */,
 				5059E5F2229CC7670089E3E7 /* EventList.swift in Sources */,
 				1370AECD229DE1FB00B33B64 /* CalendarView.swift in Sources */,
@@ -302,6 +310,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G7H785MT4Z;
 				INFOPLIST_FILE = ChurchScheduler/Info.plist;
@@ -309,7 +318,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.edu.cs193p.jamwheel.ChurchScheduler;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.edu.cs193p.jamwheel.MVJ-Calendar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -320,6 +329,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G7H785MT4Z;
 				INFOPLIST_FILE = ChurchScheduler/Info.plist;
@@ -327,7 +337,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.edu.cs193p.jamwheel.ChurchScheduler;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.edu.cs193p.jamwheel.MVJ-Calendar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
