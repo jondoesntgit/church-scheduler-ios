@@ -8,27 +8,60 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
+class CalendarViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, URLSessionDownloadDelegate {
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //downloadService.downloadSession = downloadSession
         
-        let event1 = Event(name: "Vespers")
-        let event2 = Event(name: "Sabbath School")
-        let event3 = Event(name: "Church")
-        let event4 = Event(name: "Show the TA")
+        /*do {
+            self.calendarManager = try CalendarManager(urlString: , delegate: self)
+        } catch CalendarManagerError.InvalidURL {
+            print("urlString for calendar manager is bad")
+        } catch {
+            print("Some other error")
+        }*/
         
-        event1.startTime = Date(year: 2019, month: 5, day: 31)
-        event2.startTime = Date(year: 2019, month: 6, day: 1)
-        event3.startTime = Date(year: 2019, month: 6, day: 1)
+        guard let url = URL(string: "http://s3.jamwheeler.com/mvj_scheduler/data2.json") else { print ("DOES NOT WORK"); return}
         
-        eventList.add(event1)
-        eventList.add(event2)
-        eventList.add(event3)
-        eventList.add(event4)
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+            print("Starting task")
+            print(url)
+            if data == nil {
+                print(data as Any)
+                //throw CalendarManagerError.noDataReturned
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let events = try decoder.decode([Event].self, from: data!)
+                for event in events {
+                    self.eventList.add(event)
+                }
+                DispatchQueue.main.async {
+                    self.calendarView.reloadData()
+                }
+                //self.calendarView.setNeedsDisplay()
+
+            } catch let parsingError {
+                print ("Error")
+                print(parsingError)
+            }
+            /*
+             if let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [EventList] {
+             print(json!.count)
+             print("items retrieved")
+             }
+             */
+        }
+        task.resume()
+        print("Finished Calendar view")
         
         setActiveDate(Date())
+        
+        self.title = "June 2019"
         
         // Get current month
         let nowComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
@@ -53,6 +86,19 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     // Mark: - Model
     
+    // https://www.raywenderlich.com/567-urlsession-tutorial-getting-started
+    lazy var downloadsSession: URLSession = {
+        let configuration = URLSessionConfiguration.default
+        return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+    }()
+    
+    var dataTask: URLSessionDataTask?
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        print("Finished downloading to \(location)")
+    }
+    
+    var calendarManager: CalendarManager?
     var eventList = EventList()
     var thisDaysEvents = [Event]()
     var dates = [Date]()
@@ -68,17 +114,20 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("numitems")
         return dates.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Day View Cell", for: indexPath)
         if let calendarDayView = cell as? CalendarDayView {
+
             let index = indexPath.item
-            calendarDayView.delegate = self
+             calendarDayView.delegate = self
             let date = dates[index].roundedToDay()
+            print(date)
             calendarDayView.date = date
-            calendarDayView.numberOfEvents = eventList.getEventsSameDayAs(date).count
+            calendarDayView.events = eventList.getEventsSameDayAs(date)
         }
         return cell
     }

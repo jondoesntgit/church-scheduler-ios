@@ -12,11 +12,6 @@ class EventInspector: UITableViewController {
 
     // MARK: - Mini Model
     
-    var rows: [String: String] = [
-        "Start Time": "12:34",
-        "End Time": "13:45",
-        "Person responsible": "Jonathan Wheeler"
-    ]
     var event: Event!
     
     override func viewDidLoad() {
@@ -35,20 +30,20 @@ class EventInspector: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 1 //event.components.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return rows.count
+        return event.components.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "eeee", for: indexPath) as! EventPropertyTableViewCell
-        let key = Array(rows.keys)[indexPath.row]
-        let value = Array(rows.values)[indexPath.row]
-        cell.leftLabel.text = key
-        cell.rightLabel.text = value
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Event Component", for: indexPath) as! EventPropertyTableViewCell
+        let eventComponent = event.components[indexPath.row]
+        cell.leftLabel.text = eventComponent.leftText
+        cell.rightLabel.text = eventComponent.rightText
+        cell.centerLabel.text = eventComponent.centerText
         // Configure the cell...
 
         return cell

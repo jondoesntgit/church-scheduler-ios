@@ -12,6 +12,7 @@ class EventPropertyTableViewCell: UITableViewCell {
     
     @IBOutlet weak var leftLabel: UILabel!
     @IBOutlet weak var rightLabel: UILabel!
+    @IBOutlet weak var centerLabel: UILabel!
     
     
     var propertyName: String!

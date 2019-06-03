@@ -8,7 +8,7 @@
 
 import Foundation
 
-class EventList {
+class EventList: Codable {
     
     var events: [Date: [Event]] = [:]
     

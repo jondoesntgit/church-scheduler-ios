@@ -10,7 +10,6 @@ import UIKit
 
 class CalendarDayView: UICollectionViewCell {
     @IBOutlet weak private var dateLabel: UILabel!
-    @IBOutlet weak var eventDotsView: CalendarDayViewEventDotsView!
     
     var delegate: CalendarViewController?
     
@@ -26,28 +25,6 @@ class CalendarDayView: UICollectionViewCell {
         }
     }
     
-    var numberOfEvents: Int {
-        set {
-            eventDotsView.numberOfEvents = newValue
-        }
-        get {
-            return eventDotsView.numberOfEvents
-        }
-    }
-    
-    override func didAddSubview(_ view: UIView) {
-        view.isUserInteractionEnabled = true
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleTap(by:))))
-    }
-    
-    @objc func handleTap(by: UITapGestureRecognizer) {
-        delegate?.setActiveDate(date)
-    }
-}
-
-@IBDesignable
-class CalendarDayViewEventDotsView: UIView {
-    
     private struct Constants {
         static var spacingToDiameterRatio: CGFloat = 0.2
         static var maxNumberOfDotsToShow = 4
@@ -61,13 +38,17 @@ class CalendarDayViewEventDotsView: UIView {
         }
     }
     
-    @IBInspectable
-    var numberOfEvents: Int = 4
+    var events: [Event] = []
+    
+    override func didAddSubview(_ view: UIView) {
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleTap(by:))))
+    }
     
     override func draw(_ rect: CGRect) {
-        
+        let numberOfEvents = events.count
         for index in 0..<numberOfEvents {
-            let startY = bounds.midY - dotWidth / 2
+            let startY = bounds.maxY - dotWidth
             let startX = bounds.midX - dotWidth / 2
                 + CGFloat(Double(index) - Double(numberOfEvents - 1) / 2) * (Constants.spacingToDiameterRatio + 1) * dotWidth
             let circleBounds = CGRect(x: startX, y: startY, width: dotWidth, height: dotWidth)
@@ -75,5 +56,9 @@ class CalendarDayViewEventDotsView: UIView {
             UIColor.blue.setFill()
             circle.fill()
         }
+    }
+    
+    @objc func handleTap(by: UITapGestureRecognizer) {
+        delegate?.setActiveDate(date)
     }
 }

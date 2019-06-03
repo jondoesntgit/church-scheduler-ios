@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="e6X-aB-jsa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="e6X-aB-jsa">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,29 +45,15 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQp-EB-DsS" customClass="CalendarDayViewEventDotsView" customModule="ChurchScheduler" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="20.5" width="50" height="29.5"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="numberOfEvents">
-                                                            <integer key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="drA-A1-MWC" firstAttribute="top" secondItem="7N9-ky-3X2" secondAttribute="top" id="3o7-Qd-DXo"/>
                                             <constraint firstItem="drA-A1-MWC" firstAttribute="leading" secondItem="7N9-ky-3X2" secondAttribute="leading" id="9Sf-GT-n5p"/>
-                                            <constraint firstItem="CQp-EB-DsS" firstAttribute="top" secondItem="drA-A1-MWC" secondAttribute="bottom" id="ANu-im-zqO"/>
                                             <constraint firstAttribute="trailing" secondItem="drA-A1-MWC" secondAttribute="trailing" id="BQP-tE-RbM"/>
-                                            <constraint firstAttribute="trailing" secondItem="CQp-EB-DsS" secondAttribute="trailing" id="eab-Io-gb3"/>
-                                            <constraint firstItem="CQp-EB-DsS" firstAttribute="leading" secondItem="7N9-ky-3X2" secondAttribute="leading" id="lbT-TS-DyP"/>
-                                            <constraint firstAttribute="bottom" secondItem="CQp-EB-DsS" secondAttribute="bottom" id="sTx-sN-6xo"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="dateLabel" destination="drA-A1-MWC" id="deG-S3-02J"/>
-                                            <outlet property="eventDotsView" destination="CQp-EB-DsS" id="k1h-6z-fRI"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -129,36 +115,49 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Event Property Row" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="eeee" id="9vL-PR-bsB" customClass="EventPropertyTableViewCell" customModule="ChurchScheduler" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Event Property Row" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Event Component" rowHeight="70" id="9vL-PR-bsB" customClass="EventPropertyTableViewCell" customModule="ChurchScheduler" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9vL-PR-bsB" id="QSg-h1-fCi">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="69.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXJ-jx-szs">
-                                            <rect key="frame" x="352" y="11" width="42" height="22"/>
+                                            <rect key="frame" x="352" y="11" width="42" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRd-wB-VAO">
-                                            <rect key="frame" x="20" y="0.0" width="42" height="43.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRd-wB-VAO">
+                                            <rect key="frame" x="20" y="11" width="42" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="utJ-6e-Y8t"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Middle Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15x-dE-kZh">
+                                            <rect key="frame" x="0.0" y="36" width="414" height="23.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="15x-dE-kZh" secondAttribute="trailing" id="3IY-7E-opW"/>
+                                        <constraint firstItem="15x-dE-kZh" firstAttribute="top" secondItem="tRd-wB-VAO" secondAttribute="bottom" id="5Ba-zF-8rL"/>
                                         <constraint firstItem="MXJ-jx-szs" firstAttribute="trailing" secondItem="QSg-h1-fCi" secondAttribute="trailingMargin" id="5lH-55-Svq"/>
-                                        <constraint firstAttribute="bottom" secondItem="tRd-wB-VAO" secondAttribute="bottom" id="ETd-aH-Jvf"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="MXJ-jx-szs" secondAttribute="bottom" id="LdH-S1-CS3"/>
                                         <constraint firstItem="MXJ-jx-szs" firstAttribute="top" secondItem="QSg-h1-fCi" secondAttribute="topMargin" id="SxF-Nc-ptX"/>
-                                        <constraint firstItem="tRd-wB-VAO" firstAttribute="leading" secondItem="QSg-h1-fCi" secondAttribute="leading" id="j6d-zG-aQ8"/>
-                                        <constraint firstItem="tRd-wB-VAO" firstAttribute="top" secondItem="QSg-h1-fCi" secondAttribute="top" id="s6o-rw-SnH"/>
+                                        <constraint firstAttribute="bottom" secondItem="15x-dE-kZh" secondAttribute="bottom" constant="10" id="VEc-3B-HKV"/>
+                                        <constraint firstItem="MXJ-jx-szs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tRd-wB-VAO" secondAttribute="trailing" constant="20" id="b0X-jc-Q8W"/>
+                                        <constraint firstItem="15x-dE-kZh" firstAttribute="leading" secondItem="QSg-h1-fCi" secondAttribute="leading" id="iq4-7d-Y40"/>
+                                        <constraint firstItem="tRd-wB-VAO" firstAttribute="leading" secondItem="QSg-h1-fCi" secondAttribute="leadingMargin" id="j6d-zG-aQ8"/>
+                                        <constraint firstItem="tRd-wB-VAO" firstAttribute="top" secondItem="QSg-h1-fCi" secondAttribute="topMargin" id="s6o-rw-SnH"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="centerLabel" destination="15x-dE-kZh" id="kYa-Sd-0en"/>
                                     <outlet property="leftLabel" destination="tRd-wB-VAO" id="NmM-H4-QMq"/>
                                     <outlet property="rightLabel" destination="MXJ-jx-szs" id="CCL-sM-efY"/>
                                 </connections>
