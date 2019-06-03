@@ -41,20 +41,22 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Gather current location information relative to an event location</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-	    <key>NSAllowsArbitraryLoads</key>
-	    <true/>
-	    <key>NSExceptionDomains</key>
-	    <dict>
-		<key>example.com</key>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
 		<dict>
-		    <key>NSExceptionAllowsInsecureHTTPLoads</key>
-		    <true/>
-		    <key>NSIncludesSubdomains</key>
-		    <true/>
+			<key>example.com</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
 		</dict>
-	    </dict>
 	</dict>
 </dict>
 </plist>

@@ -14,6 +14,10 @@ class Event: Codable {
     var startTime: Date = Date()
     var endTime: Date?
     var components = [EventComponent]()
+    var notes: String?
+    var latitude: Double?
+    var longitude: Double?
+    var address: String?
     var day: Date {
         get {
             let components = Calendar.current.dateComponents([.year, .month, .day], from: startTime)
@@ -35,5 +39,9 @@ class Event: Codable {
         startTime = try container.decode(Date.self, forKey: .startTime)
         endTime = try container.decodeIfPresent(Date.self, forKey: .endTime)
         components = try container.decodeIfPresent([EventComponent].self, forKey: .components) ?? []
+        notes = try container.decodeIfPresent(String.self, forKey: .notes)
+        latitude = try container.decodeIfPresent(Double.self, forKey: .latitude)
+        longitude = try container.decodeIfPresent(Double.self, forKey: .longitude)
+        address = try container.decodeIfPresent(String.self, forKey: .address)
     }
 }

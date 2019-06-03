@@ -12,6 +12,7 @@
 		1370AECD229DE1FB00B33B64 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1370AECC229DE1FB00B33B64 /* CalendarView.swift */; };
 		1370AECF229DE96C00B33B64 /* EventInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1370AECE229DE96C00B33B64 /* EventInspector.swift */; };
 		1370AED1229DEE8400B33B64 /* EventPropertyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1370AED0229DEE8400B33B64 /* EventPropertyTableViewCell.swift */; };
+		503EA25322A4D6F9007EEF2A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503EA25222A4D6F9007EEF2A /* MapViewController.swift */; };
 		5059E5F2229CC7670089E3E7 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5059E5F1229CC7670089E3E7 /* EventList.swift */; };
 		5059E5F4229CC7A90089E3E7 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5059E5F3229CC7A80089E3E7 /* Event.swift */; };
 		507BBF902298C2D7000FE12E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507BBF8F2298C2D7000FE12E /* AppDelegate.swift */; };
@@ -29,6 +30,7 @@
 		1370AECC229DE1FB00B33B64 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1370AECE229DE96C00B33B64 /* EventInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInspector.swift; sourceTree = "<group>"; };
 		1370AED0229DEE8400B33B64 /* EventPropertyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPropertyTableViewCell.swift; sourceTree = "<group>"; };
+		503EA25222A4D6F9007EEF2A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5059E5F1229CC7670089E3E7 /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 		5059E5F3229CC7A80089E3E7 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		507BBF8C2298C2D6000FE12E /* ChurchScheduler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChurchScheduler.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,7 @@
 				5059E5F3229CC7A80089E3E7 /* Event.swift */,
 				1366DC8C22A1D919004DDE1B /* EventComponent.swift */,
 				507BBF932298C2D7000FE12E /* Main.storyboard */,
+				503EA25222A4D6F9007EEF2A /* MapViewController.swift */,
 				1370AECE229DE96C00B33B64 /* EventInspector.swift */,
 				1370AED0229DEE8400B33B64 /* EventPropertyTableViewCell.swift */,
 				507BBF962298C2DA000FE12E /* Assets.xcassets */,
@@ -169,6 +172,7 @@
 				5059E5F2229CC7670089E3E7 /* EventList.swift in Sources */,
 				1366DC8F22A1F0FB004DDE1B /* CalendarManager.swift in Sources */,
 				1370AECD229DE1FB00B33B64 /* CalendarView.swift in Sources */,
+				503EA25322A4D6F9007EEF2A /* MapViewController.swift in Sources */,
 				507BBFA42298CDBE000FE12E /* CalendarViewController.swift in Sources */,
 				507BBFAC229B7F16000FE12E /* CalendarDayView.swift in Sources */,
 				507BBF902298C2D7000FE12E /* AppDelegate.swift in Sources */,

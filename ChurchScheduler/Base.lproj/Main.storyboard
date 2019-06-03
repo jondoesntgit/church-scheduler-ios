@@ -160,6 +160,7 @@
                                     <outlet property="centerLabel" destination="15x-dE-kZh" id="kYa-Sd-0en"/>
                                     <outlet property="leftLabel" destination="tRd-wB-VAO" id="NmM-H4-QMq"/>
                                     <outlet property="rightLabel" destination="MXJ-jx-szs" id="CCL-sM-efY"/>
+                                    <segue destination="0a7-h0-LUT" kind="presentation" identifier="Show Map Details" id="n5t-wZ-cdK"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -171,7 +172,60 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kcq-Q9-Lbs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1805.7971014492755" y="24.776785714285712"/>
+            <point key="canvasLocation" x="1809" y="32"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="Xhf-x8-H0h">
+            <objects>
+                <viewController id="0a7-h0-LUT" customClass="MapViewController" customModule="ChurchScheduler" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Lc-Zv-I71">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mJw-v7-s9O">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                            </mapView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFB-oC-SVT">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Set Location" id="fB3-dm-gn9">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="xoW-Oo-sOg">
+                                            <connections>
+                                                <action selector="didTouchCancelButton:" destination="0a7-h0-LUT" id="fcq-vV-nsa"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="cG0-6v-j4f">
+                                            <connections>
+                                                <action selector="didTouchSaveButton:" destination="0a7-h0-LUT" id="0aV-vY-W0p"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kOj-NA-RgQ" firstAttribute="trailing" secondItem="mJw-v7-s9O" secondAttribute="trailing" id="69m-lX-SWd"/>
+                            <constraint firstItem="kOj-NA-RgQ" firstAttribute="trailing" secondItem="RFB-oC-SVT" secondAttribute="trailing" id="VCM-o3-ob4"/>
+                            <constraint firstItem="kOj-NA-RgQ" firstAttribute="bottom" secondItem="mJw-v7-s9O" secondAttribute="bottom" id="ahS-CF-hbb"/>
+                            <constraint firstItem="RFB-oC-SVT" firstAttribute="leading" secondItem="kOj-NA-RgQ" secondAttribute="leading" id="jwR-ML-ASf"/>
+                            <constraint firstItem="RFB-oC-SVT" firstAttribute="baseline" secondItem="mJw-v7-s9O" secondAttribute="firstBaseline" symbolType="layoutAnchor" id="n6Q-Qc-bgw"/>
+                            <constraint firstItem="mJw-v7-s9O" firstAttribute="leading" secondItem="kOj-NA-RgQ" secondAttribute="leading" id="sez-Dc-O9H"/>
+                            <constraint firstItem="RFB-oC-SVT" firstAttribute="top" secondItem="kOj-NA-RgQ" secondAttribute="top" id="tL9-iz-VFA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kOj-NA-RgQ"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="mJw-v7-s9O" id="gia-RN-QB7"/>
+                        <segue destination="ZJ8-YL-ZKY" kind="unwind" identifier="Unwind to Event Inspector" unwindAction="unwindToEventInspectorWithSegue:" id="nxh-ex-f2N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wFz-ae-4MP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ZJ8-YL-ZKY" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2666.666666666667" y="259.82142857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5cb-A0-qnO">
