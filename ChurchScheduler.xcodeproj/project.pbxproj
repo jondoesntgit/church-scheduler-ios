@@ -22,6 +22,7 @@
 		507BBFA42298CDBE000FE12E /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507BBFA32298CDBD000FE12E /* CalendarViewController.swift */; };
 		507BBFA62298CE84000FE12E /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507BBFA52298CE84000FE12E /* Grid.swift */; };
 		507BBFAC229B7F16000FE12E /* CalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507BBFAB229B7F16000FE12E /* CalendarDayView.swift */; };
+		50CAFDF622A5F5EE00AB5F7B /* ComponentEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAFDF522A5F5EE00AB5F7B /* ComponentEditorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		507BBFA32298CDBD000FE12E /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		507BBFA52298CE84000FE12E /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		507BBFAB229B7F16000FE12E /* CalendarDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayView.swift; sourceTree = "<group>"; };
+		50CAFDF522A5F5EE00AB5F7B /* ComponentEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentEditorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				507BBF932298C2D7000FE12E /* Main.storyboard */,
 				503EA25222A4D6F9007EEF2A /* MapViewController.swift */,
 				1370AECE229DE96C00B33B64 /* EventInspector.swift */,
+				50CAFDF522A5F5EE00AB5F7B /* ComponentEditorViewController.swift */,
 				1370AED0229DEE8400B33B64 /* EventPropertyTableViewCell.swift */,
 				507BBF962298C2DA000FE12E /* Assets.xcassets */,
 				507BBF982298C2DA000FE12E /* LaunchScreen.storyboard */,
@@ -168,6 +171,7 @@
 				1366DC8D22A1D919004DDE1B /* EventComponent.swift in Sources */,
 				1370AECF229DE96C00B33B64 /* EventInspector.swift in Sources */,
 				1370AED1229DEE8400B33B64 /* EventPropertyTableViewCell.swift in Sources */,
+				50CAFDF622A5F5EE00AB5F7B /* ComponentEditorViewController.swift in Sources */,
 				5059E5F4229CC7A90089E3E7 /* Event.swift in Sources */,
 				5059E5F2229CC7670089E3E7 /* EventList.swift in Sources */,
 				1366DC8F22A1F0FB004DDE1B /* CalendarManager.swift in Sources */,

@@ -21,9 +21,13 @@ class EventInspector: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        // Update data when modal is dismissed
+        tableView.reloadData()
+    }
 
     
     // MARK: - Table view data source
@@ -41,9 +45,7 @@ class EventInspector: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Event Component", for: indexPath) as! EventPropertyTableViewCell
         let eventComponent = event.components[indexPath.row]
-        cell.leftLabel.text = eventComponent.leftText
-        cell.rightLabel.text = eventComponent.rightText
-        cell.centerLabel.text = eventComponent.centerText
+        cell.eventComponent = eventComponent
         // Configure the cell...
 
         return cell
@@ -88,14 +90,19 @@ class EventInspector: UITableViewController {
     // MARK: - Navigation
     
     @IBAction func unwindToEventInspector(segue: UIStoryboardSegue) {
-        print("Unwound")
     }
-
+    
     //In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier! == "Show Map Details" {
+        if segue.identifier! == "Edit Comonent Information" {
+            if let destination = segue.destination.contents as? ComponentEditorViewController {
+                if let cell = sender as? EventPropertyTableViewCell {
+                    destination.eventComponent = cell.eventComponent
+                }
+            }
+        } else if segue.identifier! == "Show Map Details" {
             if let mapViewController = segue.destination.contents as? MapViewController {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
                     mapViewController.parentController = self
@@ -104,5 +111,6 @@ class EventInspector: UITableViewController {
             }
         }
     }
+ 
 
 }

@@ -17,6 +17,13 @@ class EventPropertyTableViewCell: UITableViewCell {
     
     var propertyName: String!
     var propertyValue: Any!
+    var eventComponent: EventComponent! {
+        didSet {
+            leftLabel.text = eventComponent.leftText
+            rightLabel.text = eventComponent.rightText
+            centerLabel.text = eventComponent.centerText
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

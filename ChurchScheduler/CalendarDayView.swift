@@ -21,7 +21,7 @@ class CalendarDayView: UICollectionViewCell {
     
     var isActive: Bool = false {
         didSet {
-            backgroundColor = isActive ? UIColor.gray : UIColor.clear
+            backgroundColor = isActive ? #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1) : UIColor.clear
         }
     }
     
@@ -48,7 +48,7 @@ class CalendarDayView: UICollectionViewCell {
     override func draw(_ rect: CGRect) {
         let numberOfEvents = events.count
         for index in 0..<numberOfEvents {
-            let startY = bounds.maxY - dotWidth
+            let startY = bounds.maxY - dotWidth - 5
             let startX = bounds.midX - dotWidth / 2
                 + CGFloat(Double(index) - Double(numberOfEvents - 1) / 2) * (Constants.spacingToDiameterRatio + 1) * dotWidth
             let circleBounds = CGRect(x: startX, y: startY, width: dotWidth, height: dotWidth)
