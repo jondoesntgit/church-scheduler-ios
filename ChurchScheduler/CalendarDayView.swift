@@ -39,6 +39,7 @@ class CalendarDayView: UICollectionViewCell {
     }
     
     var events: [Event] = []
+    var isInDisplayMonth = false
     
     override func didAddSubview(_ view: UIView) {
         view.isUserInteractionEnabled = true
@@ -46,6 +47,7 @@ class CalendarDayView: UICollectionViewCell {
     }
     
     override func draw(_ rect: CGRect) {
+        dateLabel.textColor = isInDisplayMonth ? UIColor.black : UIColor.gray
         let numberOfEvents = events.count
         for index in 0..<numberOfEvents {
             let startY = bounds.maxY - dotWidth - 5

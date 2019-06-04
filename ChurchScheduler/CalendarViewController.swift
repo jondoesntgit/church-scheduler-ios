@@ -10,6 +10,12 @@ import UIKit
 
 class CalendarViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, URLSessionDownloadDelegate {
 
+    @IBOutlet weak var currentMonthLabel: UILabel!
+    @IBAction func didTouchNextMonth(_ sender: UIButton) {
+    }
+    @IBAction func didTouchPreviousMonth(_ sender: UIButton) {
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +67,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         setActiveDate(Date())
         
-        self.title = "June 2019"
+        self.currentMonthLabel.text = "June 2019"
         
         // Get current month
         let nowComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
@@ -103,6 +109,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     var thisDaysEvents = [Event]()
     var dates = [Date]()
     var activeDate = Date().roundedToDay()
+    var displayMonth = 6
     
     
     // Mark: - Collection View
@@ -128,6 +135,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
             print(date)
             calendarDayView.date = date
             calendarDayView.events = eventList.getEventsSameDayAs(date)
+            
+            calendarDayView.isInDisplayMonth = (date.month == displayMonth)
         }
         return cell
     }
@@ -219,6 +228,12 @@ extension Date {
     func roundedToDay() -> Date {
         let dayComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
         return Calendar.current.date(from: dayComponents)!
+    }
+    
+    var month: Int {
+        get {
+            return Calendar.current.component(.month, from: self)
+        }
     }
     
     init(year: Int, month: Int, day: Int) {
