@@ -34,23 +34,86 @@ class EventInspector: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1 //event.components.count
+        return 2 //event.components.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return event.components.count
+        if section == 0 {
+            return 4
+        } else if section == 1 {
+            return event.components.count
+        } else {
+            return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Event Component", for: indexPath) as! EventPropertyTableViewCell
-        let eventComponent = event.components[indexPath.row]
-        cell.eventComponent = eventComponent
-        // Configure the cell...
-
-        return cell
+        let section = indexPath.section
+        
+        if section == 0 {
+            let row = indexPath.row
+            
+            if row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Title Cell") as! EventTitleCell
+                cell.event = event
+                cell.titleTextArea.text = event.name
+                cell.selectionStyle = .none
+                return cell
+            } else if row == 2 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Event Date Picker") as! EventDatePickerTableViewCell
+                cell.event = event!
+                cell.startOrStop = .start
+                return cell
+            } else if row == 3 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Event Date Picker") as! EventDatePickerTableViewCell
+                cell.event = event!
+                cell.startOrStop = .stop
+                return cell
+            } else if row == 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Event Map Picker") as! EventLocationTableViewCell
+                cell.event = event
+                //cell.accessoryType = .disclosureIndicator
+                return cell
+            } else {
+                return UITableViewCell()
+            }
+        } else  {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Event Component", for: indexPath) as! EventPropertyTableViewCell
+            let eventComponent = event.components[indexPath.row]
+            cell.eventComponent = eventComponent
+            cell.accessoryType = .disclosureIndicator
+            return cell
+        }
+        
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        for cell in tableView.visibleCells {
+            if let datePickerCell = cell as? EventDatePickerTableViewCell {
+                let didSelectThisCell = (indexPath == tableView.indexPath(for: cell))
+                //cell.becomeFirstResponder()
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let datePickerCell = tableView.cellForRow(at: indexPath) as? EventDatePickerTableViewCell {
+            view.endEditing(true)
+            //datePickerCell.resignFirstResponder()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Event Details"
+        case 1:
+            return "Event Program"
+        default:
+            return nil
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -92,11 +155,25 @@ class EventInspector: UITableViewController {
     @IBAction func unwindToEventInspector(segue: UIStoryboardSegue) {
     }
     
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if let cell = sender as? UITableViewCell {
+            if let indexPath = tableView.indexPath(for: cell) {
+                if indexPath.section == 1 {
+                    return true
+                } else {
+                    return indexPath.row == 3
+                }
+            }
+        }
+        return false
+    }
+    
     //In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier! == "Edit Comonent Information" {
+        if segue.identifier! == "Edit Component Information" {
             if let destination = segue.destination.contents as? ComponentEditorViewController {
                 if let cell = sender as? EventPropertyTableViewCell {
                     destination.eventComponent = cell.eventComponent
@@ -104,6 +181,7 @@ class EventInspector: UITableViewController {
             }
         } else if segue.identifier! == "Show Map Details" {
             if let mapViewController = segue.destination.contents as? MapViewController {
+                print("Going to maps")
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
                     mapViewController.parentController = self
                     // let location, etc...

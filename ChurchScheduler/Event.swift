@@ -26,6 +26,18 @@ class Event: Codable {
         }
     }
     
+    var amIInvolved: Bool {
+        get {
+            let myName = UserDefaults.standard.string(forKey: "UserName")
+            for component in components {
+                if myName == component.rightText {
+                    return true
+                }
+            }
+            return false
+        }
+    }
+    
     init(name: String) {
         self.name = name
     }

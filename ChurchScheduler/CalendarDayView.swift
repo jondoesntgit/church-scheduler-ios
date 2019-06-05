@@ -49,13 +49,18 @@ class CalendarDayView: UICollectionViewCell {
     override func draw(_ rect: CGRect) {
         dateLabel.textColor = isInDisplayMonth ? UIColor.black : UIColor.gray
         let numberOfEvents = events.count
+        if numberOfEvents > 0 {
+            ()
+        }
+        
         for index in 0..<numberOfEvents {
             let startY = bounds.maxY - dotWidth - 5
             let startX = bounds.midX - dotWidth / 2
                 + CGFloat(Double(index) - Double(numberOfEvents - 1) / 2) * (Constants.spacingToDiameterRatio + 1) * dotWidth
             let circleBounds = CGRect(x: startX, y: startY, width: dotWidth, height: dotWidth)
             let circle = UIBezierPath(ovalIn: circleBounds)
-            UIColor.blue.setFill()
+            let activeColor = events[index].amIInvolved ? UIColor.green : UIColor.blue
+            activeColor.setFill()
             circle.fill()
         }
     }

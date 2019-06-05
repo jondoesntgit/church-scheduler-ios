@@ -19,6 +19,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.title = "Calendar"
         //downloadService.downloadSession = downloadSession
         
         /*do {
@@ -90,6 +91,12 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         
     }
     
+    // Make sure everything is up-to-date when we exit the detail MVC
+    override func viewDidDisappear(_ animated: Bool) {
+        eventTableView.reloadData()
+        calendarView.reloadData()
+    }
+    
     // Mark: - Model
     
     // https://www.raywenderlich.com/567-urlsession-tutorial-getting-started
@@ -135,6 +142,10 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
             print(date)
             calendarDayView.date = date
             calendarDayView.events = eventList.getEventsSameDayAs(date)
+            let events = calendarDayView.events
+            if events.count > 0 {
+                ()
+            }
             
             calendarDayView.isInDisplayMonth = (date.month == displayMonth)
         }
@@ -194,6 +205,12 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     override func viewDidAppear(_ animated: Bool) {
         setActiveDate(activeDate)
+        for cell in calendarView.visibleCells {
+            cell.setNeedsDisplay()
+        }
+        //calendarView.reloadData()
+        ///calendarView.setNeedsLayout()
+        //calendarView.setNeedsDisplay()
     }
     
     // MARK: - Navigation
