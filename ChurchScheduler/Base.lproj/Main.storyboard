@@ -264,6 +264,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Se4-Cl-lNO">
                                                     <rect key="frame" x="351" y="6" width="49" height="31"/>
+                                                    <connections>
+                                                        <action selector="didChangeAdminSwitch:" destination="DbL-na-WDo" eventType="valueChanged" id="HGq-JF-4Sf"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -380,6 +383,7 @@
                     <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="xQE-Tg-aJn"/>
                     <navigationItem key="navigationItem" title="Settings" id="bFq-sf-lMu"/>
                     <connections>
+                        <outlet property="isAdminSwitch" destination="Se4-Cl-lNO" id="xz7-aE-j8d"/>
                         <outlet property="nameTextArea" destination="Yec-vg-yiE" id="4qq-bJ-L3m"/>
                         <outlet property="notifyLaterCell" destination="UBY-RX-Qbt" id="SK9-Wp-FLg"/>
                         <outlet property="notifyNowCell" destination="sSZ-w9-fxJ" id="cJw-v5-Uxs"/>

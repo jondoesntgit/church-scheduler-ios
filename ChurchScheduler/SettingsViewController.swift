@@ -22,7 +22,17 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.handleTap(sender:)))
             cell?.addGestureRecognizer(tapGestureRecognizer)
         }
+        isAdminSwitch.isOn = Globals.isAdmin
     }
+    
+    
+    @IBOutlet weak var isAdminSwitch: UISwitch!
+    
+    @IBAction func didChangeAdminSwitch(_ sender: UISwitch) {
+        Globals.isAdmin = sender.isOn
+    }
+    
+    
     @IBOutlet weak var nameTextArea: UITextField!
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

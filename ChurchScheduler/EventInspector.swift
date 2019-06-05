@@ -21,7 +21,9 @@ class EventInspector: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        if Globals.isAdmin {
+            self.navigationItem.rightBarButtonItem = self.editButtonItem
+        }
         self.tableView.allowsSelection = false
         self.tableView.allowsSelectionDuringEditing = true
     }
@@ -76,6 +78,8 @@ class EventInspector: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Event Map Picker") as! EventLocationTableViewCell
                 cell.event = event
                 //cell.accessoryType = .disclosureIndicator
+                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EventInspector.segueToMap(sender:)))
+                cell.addGestureRecognizer(tapGestureRecognizer)
                 return cell
             } else {
                 return UITableViewCell()
@@ -155,6 +159,10 @@ class EventInspector: UITableViewController {
 
     // MARK: - Navigation
     
+    @objc func segueToMap(sender: Any?) {
+        performSegue(withIdentifier: "Show Map Details", sender: sender)
+    }
+    
     @IBAction func unwindToEventInspector(segue: UIStoryboardSegue) {
     }
     
@@ -185,10 +193,7 @@ class EventInspector: UITableViewController {
         } else if segue.identifier! == "Show Map Details" {
             if let mapViewController = segue.destination.contents as? MapViewController {
                 print("Going to maps")
-                if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
-                    mapViewController.parentController = self
-                    // let location, etc...
-                }
+                mapViewController.parentController = self
             }
         }
     }
