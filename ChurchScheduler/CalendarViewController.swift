@@ -56,15 +56,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
                 print ("Error")
                 print(parsingError)
             }
-            /*
-             if let jsonData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [EventList] {
-             print(json!.count)
-             print("items retrieved")
-             }
-             */
         }
         task.resume()
-        print("Finished Calendar view")
         
         setActiveDate(Date())
         
@@ -139,14 +132,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
             let index = indexPath.item
              calendarDayView.delegate = self
             let date = dates[index].roundedToDay()
-            print(date)
             calendarDayView.date = date
             calendarDayView.events = eventList.getEventsSameDayAs(date)
-            let events = calendarDayView.events
-            if events.count > 0 {
-                ()
-            }
-            
             calendarDayView.isInDisplayMonth = (date.month == displayMonth)
         }
         return cell
@@ -208,9 +195,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         for cell in calendarView.visibleCells {
             cell.setNeedsDisplay()
         }
-        //calendarView.reloadData()
-        ///calendarView.setNeedsLayout()
-        //calendarView.setNeedsDisplay()
+        calendarView.setNeedsDisplay()
     }
     
     // MARK: - Navigation
