@@ -68,7 +68,7 @@ class EventDatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @objc func doneDatePickerPressed() {
-        print("DONE")
+        timeTextField.isUserInteractionEnabled = false
         timeTextField.resignFirstResponder()
     }
     
@@ -92,23 +92,10 @@ class EventDatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
         setText(withDate: datePicker.date)
     }
 
+    /*
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         //timeTextField.becomeFirstResponder()
     }
-    
-    /*
-    override var canResignFirstResponder: Bool {
-        return true
-    }
-    
-    override var canBecomeFirstResponder: Bool {
-        return true
-    }
- */
-    /*
-    override var inputView: UIView? {
-        return datePicker
-    }
- */
+    */
 }

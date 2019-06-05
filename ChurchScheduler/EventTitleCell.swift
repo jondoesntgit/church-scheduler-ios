@@ -14,12 +14,12 @@ class EventTitleCell: UITableViewCell, UITextFieldDelegate {
         super.awakeFromNib()
         // Initialization code
         titleTextArea.delegate = self
-        self.selectionStyle = .none
     }
     @IBOutlet weak var titleTextArea: UITextField!
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        textField.isUserInteractionEnabled = false
         return true
     }
     
@@ -30,10 +30,10 @@ class EventTitleCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
+    /*
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        titleTextArea.becomeFirstResponder()
         // Configure the view for the selected state
     }
-
+     */
 }

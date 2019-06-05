@@ -9,10 +9,10 @@
 import UIKit
 
 class EventInspector: UITableViewController {
-
-    // MARK: - Mini Model
     
     var event: Event!
+    
+    // MARK: - View Controller Lifecycle Code
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,8 @@ class EventInspector: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.tableView.allowsSelection = false
+        self.tableView.allowsSelectionDuringEditing = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +31,7 @@ class EventInspector: UITableViewController {
         tableView.reloadData()
     }
 
+    
     
     // MARK: - Table view data source
 
@@ -58,19 +61,18 @@ class EventInspector: UITableViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Title Cell") as! EventTitleCell
                 cell.event = event
                 cell.titleTextArea.text = event.name
-                cell.selectionStyle = .none
                 return cell
-            } else if row == 2 {
+            } else if row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Event Date Picker") as! EventDatePickerTableViewCell
                 cell.event = event!
                 cell.startOrStop = .start
                 return cell
-            } else if row == 3 {
+            } else if row == 2 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Event Date Picker") as! EventDatePickerTableViewCell
                 cell.event = event!
                 cell.startOrStop = .stop
                 return cell
-            } else if row == 1 {
+            } else if row == 3 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Event Map Picker") as! EventLocationTableViewCell
                 cell.event = event
                 //cell.accessoryType = .disclosureIndicator
@@ -89,18 +91,16 @@ class EventInspector: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        for cell in tableView.visibleCells {
+        let cell = tableView.cellForRow(at: indexPath)
             if let datePickerCell = cell as? EventDatePickerTableViewCell {
-                let didSelectThisCell = (indexPath == tableView.indexPath(for: cell))
-                //cell.becomeFirstResponder()
-            }
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if let datePickerCell = tableView.cellForRow(at: indexPath) as? EventDatePickerTableViewCell {
-            view.endEditing(true)
-            //datePickerCell.resignFirstResponder()
+                let textArea = datePickerCell.timeTextField
+                    
+                textArea?.isUserInteractionEnabled = true
+                textArea?.becomeFirstResponder()
+            } else if let titleCell = cell as? EventTitleCell {
+                let textArea = titleCell.titleTextArea
+                textArea?.isUserInteractionEnabled = true
+                textArea?.becomeFirstResponder()
         }
     }
     
@@ -115,15 +115,18 @@ class EventInspector: UITableViewController {
         }
     }
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
+        if indexPath.section == 0 {
+            return false
+        }
         return true
     }
-    */
-
-    /*
+    
+    
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -131,9 +134,9 @@ class EventInspector: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
+        
     }
-    */
 
     /*
     // Override to support rearranging the table view.

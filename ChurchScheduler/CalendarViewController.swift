@@ -164,6 +164,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         activeDate = date.roundedToDay()
         thisDaysEvents = eventList.getEventsSameDayAs(date)
         eventTableView.reloadData()
+        eventTableView.setNeedsDisplay()
         calendarView.setActiveCellByDate(date)
     }
     
@@ -190,11 +191,24 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         return cell
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        //activeDate.formatter
+        //let dateString = "selected date"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd"
+        let dateString = dateFormatter.string(from: activeDate)
+        return "Events for \(dateString)"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         setActiveDate(activeDate)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         for cell in calendarView.visibleCells {
             cell.setNeedsDisplay()
         }
+        calendarView.setActiveCellByDate(activeDate)
         calendarView.setNeedsDisplay()
     }
     
