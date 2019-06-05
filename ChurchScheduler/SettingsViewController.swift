@@ -13,7 +13,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.title = "Settings"
+        self.navigationController?.title = Storyboard.title
         nameTextArea.delegate = self
         let defaults = UserDefaults.standard
         nameTextArea.text = defaults.string(forKey: "UserName")
@@ -37,7 +37,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        // Allow only second section to be selected
         return (indexPath.section == 2) ? indexPath : nil
     }
     
@@ -56,35 +55,36 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
     
     //https://stackoverflow.com/a/43411623/3635467
     func notify(inSeconds: TimeInterval) {
-        print("Notifying")
         let content = UNMutableNotificationContent()
-        content.title = "Delayed notification"
+        content.title = NotificationConstants.title
         content.body = "Here is your notification from \(inSeconds) seconds ago."
         content.sound = UNNotificationSound.default
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: false)
         
-        let identifier = "UYLLocalNotification"
+        let identifier = NotificationConstants.identifier
         
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
         let center = UNUserNotificationCenter.current()
         
         center.add(request, withCompletionHandler: { (error) in
-            if let error = error {
+            if (error != nil) {
                 print("Something went wrong while adding the request")
             }
         })
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private struct NotificationConstants {
+        static var identifier: String = "UYLLocalNotification"
+        static var title: String = "Delayed notification"
     }
-    */
+    
+    private struct Storyboard {
+        static var title: String = "Settings"
+    }
 
 }
+
+
+
