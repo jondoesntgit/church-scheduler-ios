@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, URLSessionDownloadDelegate {
+class CalendarViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource {
     
     private struct Storyboard {
         static let showEventDetails = "Show Event Details"
@@ -38,7 +38,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
     }
     
-
+    // MARK: - Controller Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -77,38 +78,6 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         activeMonth = Calendar.current.dateComponents([.year, .month], from: currentDate)
         fillDatesForCurrentMonth()
         setActiveDate(currentDate)
-        
-        
-        // Get current month
-        /*
-        let nowComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
-        var firstDayOfCurrentMonth = nowComponents
-        firstDayOfCurrentMonth.day = 1
-        let firstDateOfCurrentMonth = Calendar.current.date(from: firstDayOfCurrentMonth)!
-        let firstDateOfCurrentMonthWeekday = Calendar.current.component(.weekday, from: firstDateOfCurrentMonth)
-        let numberOfDaysToShowInPreviousMonth = firstDateOfCurrentMonthWeekday - 1
-        let firstDateOfCalendar = firstDateOfCurrentMonth.addingTimeInterval(Double(-86400 * numberOfDaysToShowInPreviousMonth))
- */
-        //var workingDate = activeDate.firstSundayForCalendarView()
-        
-        
-    }
-    
-    func fillDatesForCurrentMonth() {
-        dates = []
-        var components = activeMonth!
-        components.day = 1
-        //let firstDayOfMonth = Calendar.current.nextDate(after: self, matching: activeMonth, matchingPolicy: .previousTimePreservingSmallerComponents, direction: .backward)!
-        let firstDayOfMonth = Calendar.current.date(from: components)!
-        let firstSundayOfMonth = Calendar.current.date(bySetting: .weekday, value: 1, of: firstDayOfMonth)!
-        let firstSundayOfCalendar = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: firstSundayOfMonth, wrappingComponents: false)!
-        var workingDate = Calendar.current.startOfDay(for: firstSundayOfCalendar)
-
-        let numberOfDaysToDisplay = 6 * 7 // six weeks, 42 days
-        for _ in 1...numberOfDaysToDisplay {
-            dates.append(workingDate)
-            workingDate = workingDate.nextDay()
-        }
     }
     
     // Make sure everything is up-to-date when we exit the detail MVC
@@ -117,8 +86,22 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         calendarView.reloadData()
     }
     
-    // Mark: - Model
+    override func viewWillAppear(_ animated: Bool) {
+        setActiveDate(activeDate)
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        for cell in calendarView.visibleCells {
+            cell.setNeedsDisplay()
+        }
+        calendarView.setActiveCellByDate(activeDate)
+        calendarView.setNeedsDisplay()
+    }
+    
+    
+    // MARK: - Model
+    
+    /*
     // https://www.raywenderlich.com/567-urlsession-tutorial-getting-started
     lazy var downloadsSession: URLSession = {
         let configuration = URLSessionConfiguration.default
@@ -130,8 +113,10 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         print("Finished downloading to \(location)")
     }
+ 
+ */
     
-    var calendarManager: CalendarManager?
+    //var calendarManager: CalendarManager?
     var eventList = EventList()
     var thisDaysEvents = [Event]()
     var dates = [Date]()
@@ -151,7 +136,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     
-    // Mark: - Collection View
+    // MARK: - Collection View
     @IBOutlet weak var calendarView: CalendarView! {
         didSet {
             calendarView.delegate = self
@@ -236,16 +221,23 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         return "Events for \(dateString)"
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        setActiveDate(activeDate)
-    }
+    // MARK: - Calendar Arithmetic
     
-    override func viewDidAppear(_ animated: Bool) {
-        for cell in calendarView.visibleCells {
-            cell.setNeedsDisplay()
+    func fillDatesForCurrentMonth() {
+        dates = []
+        var components = activeMonth!
+        components.day = 1
+        //let firstDayOfMonth = Calendar.current.nextDate(after: self, matching: activeMonth, matchingPolicy: .previousTimePreservingSmallerComponents, direction: .backward)!
+        let firstDayOfMonth = Calendar.current.date(from: components)!
+        let firstSundayOfMonth = Calendar.current.date(bySetting: .weekday, value: 1, of: firstDayOfMonth)!
+        let firstSundayOfCalendar = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: firstSundayOfMonth, wrappingComponents: false)!
+        var workingDate = Calendar.current.startOfDay(for: firstSundayOfCalendar)
+        
+        let numberOfDaysToDisplay = 6 * 7 // six weeks, 42 days
+        for _ in 1...numberOfDaysToDisplay {
+            dates.append(workingDate)
+            workingDate = workingDate.nextDay()
         }
-        calendarView.setActiveCellByDate(activeDate)
-        calendarView.setNeedsDisplay()
     }
     
     // MARK: - Navigation
@@ -260,16 +252,6 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
                     eventInspector.title = event.name
                 }
             }
-        }
-    }
-}
-
-extension UIViewController {
-    var contents: UIViewController {
-        if let navcon = self as? UINavigationController {
-            return navcon.visibleViewController ?? navcon
-        } else {
-            return self
         }
     }
 }

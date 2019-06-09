@@ -30,6 +30,7 @@
 		507BBFA42298CDBE000FE12E /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507BBFA32298CDBD000FE12E /* CalendarViewController.swift */; };
 		507BBFA62298CE84000FE12E /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507BBFA52298CE84000FE12E /* Grid.swift */; };
 		507BBFAC229B7F16000FE12E /* CalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507BBFAB229B7F16000FE12E /* CalendarDayView.swift */; };
+		50A33E8E22AD969B009FEF9E /* NavigationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A33E8D22AD969B009FEF9E /* NavigationUtilities.swift */; };
 		50CAFDF622A5F5EE00AB5F7B /* ComponentEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAFDF522A5F5EE00AB5F7B /* ComponentEditorViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		507BBFA32298CDBD000FE12E /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		507BBFA52298CE84000FE12E /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		507BBFAB229B7F16000FE12E /* CalendarDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayView.swift; sourceTree = "<group>"; };
+		50A33E8D22AD969B009FEF9E /* NavigationUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationUtilities.swift; sourceTree = "<group>"; };
 		50CAFDF522A5F5EE00AB5F7B /* ComponentEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentEditorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,9 +78,9 @@
 		503BD34522AD3E230036C8CD /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				507BBFAB229B7F16000FE12E /* CalendarDayView.swift */,
 				1370AECC229DE1FB00B33B64 /* CalendarView.swift */,
 				507BBFA32298CDBD000FE12E /* CalendarViewController.swift */,
+				507BBFAB229B7F16000FE12E /* CalendarDayView.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -123,6 +125,7 @@
 			children = (
 				507BBFA52298CE84000FE12E /* Grid.swift */,
 				503BD34A22AD41630036C8CD /* DateExtensions.swift */,
+				50A33E8D22AD969B009FEF9E /* NavigationUtilities.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				5043D42D22A6325B00BC48CD /* SettingsViewController.swift in Sources */,
 				507BBFA42298CDBE000FE12E /* CalendarViewController.swift in Sources */,
 				503BD34222A737FD0036C8CD /* DatePickerWithCloseButtons.swift in Sources */,
+				50A33E8E22AD969B009FEF9E /* NavigationUtilities.swift in Sources */,
 				507BBFAC229B7F16000FE12E /* CalendarDayView.swift in Sources */,
 				507BBF902298C2D7000FE12E /* AppDelegate.swift in Sources */,
 				507BBFA62298CE84000FE12E /* Grid.swift in Sources */,
