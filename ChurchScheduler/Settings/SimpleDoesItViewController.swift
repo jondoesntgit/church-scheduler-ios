@@ -13,12 +13,15 @@ import WebKit
 
 class SimpleDoesItViewController: UIViewController {
     
+    struct Constants {
+        static let websiteURL = URL(string: "http://simpledoesit.com")!
+    }
+    
     @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let url = URL(string: "http://simpledoesit.com")!
-        let urlRequest = URLRequest(url: url)
+        let urlRequest = URLRequest(url: Constants.websiteURL)
         webView.load(urlRequest)
         // Do any additional setup after loading the view.
     }

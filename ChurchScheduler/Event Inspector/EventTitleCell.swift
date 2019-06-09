@@ -29,11 +29,4 @@ class EventTitleCell: UITableViewCell, UITextFieldDelegate {
             event.name = newTitle
         }
     }
-    
-    /*
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-     */
 }

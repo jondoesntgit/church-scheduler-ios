@@ -10,6 +10,11 @@ import UIKit
 
 class EventInspector: UITableViewController {
     
+    private struct Storyboard {
+        static let showMapDetails = "Show Map Details"
+        static let editComponentInformation = "Edit Component Information"
+    }
+    
     var event: Event!
     
     // MARK: - View Controller Lifecycle Code
@@ -20,7 +25,6 @@ class EventInspector: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         if Globals.isAdmin {
             self.navigationItem.rightBarButtonItem = self.editButtonItem
         }
@@ -32,8 +36,6 @@ class EventInspector: UITableViewController {
         // Update data when modal is dismissed
         tableView.reloadData()
     }
-
-    
     
     // MARK: - Table view data source
 
@@ -136,12 +138,15 @@ class EventInspector: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
+        } /* else if editingStyle == .insert {
+            // I'll get to this eventually
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
+        } */
         
     }
 
+    // I'll get to these methods eventually, but probably not by the time I submit the project
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -160,7 +165,7 @@ class EventInspector: UITableViewController {
     // MARK: - Navigation
     
     @objc func segueToMap(sender: Any?) {
-        performSegue(withIdentifier: "Show Map Details", sender: sender)
+        performSegue(withIdentifier: Storyboard.showMapDetails, sender: sender)
     }
     
     @IBAction func unwindToEventInspector(segue: UIStoryboardSegue) {
@@ -184,15 +189,14 @@ class EventInspector: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        if segue.identifier! == "Edit Component Information" {
+        if segue.identifier! == Storyboard.editComponentInformation {
             if let destination = segue.destination.contents as? ComponentEditorViewController {
                 if let cell = sender as? EventPropertyTableViewCell {
                     destination.eventComponent = cell.eventComponent
                 }
             }
-        } else if segue.identifier! == "Show Map Details" {
+        } else if segue.identifier! == Storyboard.showMapDetails {
             if let mapViewController = segue.destination.contents as? MapViewController {
-                print("Going to maps")
                 mapViewController.parentController = self
             }
         }

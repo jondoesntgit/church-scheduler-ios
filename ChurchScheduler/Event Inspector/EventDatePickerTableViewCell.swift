@@ -14,14 +14,16 @@ enum StartOrStop{
 }
 
 class EventDatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
+    
+    private struct Storyboard {
+        static let startLabel = "Start time"
+        static let stopLabel = "Stop time"
+        static let datePickerDoneText = "Done"
+    }
 
     var event: Event!
-    
     @IBOutlet weak var startStopTimeLabel: UILabel!
-    
     @IBOutlet weak var timeTextField: UITextField!
-    
-    var datePickerWithButtons = DatePickerWithCloseButtons()
     
     var datePicker = UIDatePicker()
     var startOrStop: StartOrStop! {
@@ -29,11 +31,11 @@ class EventDatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
             if event != nil {
                 switch startOrStop! {
                 case .start:
-                    startStopTimeLabel.text = "Start time"
+                    startStopTimeLabel.text = Storyboard.startLabel
                     setText(withDate: event.startTime)
                     datePicker.date = event.startTime
                 case .stop:
-                    startStopTimeLabel.text = "End time"
+                    startStopTimeLabel.text = Storyboard.stopLabel
                     setText(withDate: event.endTime)
                     datePicker.date = event.endTime ?? Date()
                 }
@@ -50,21 +52,19 @@ class EventDatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
         datePicker.backgroundColor = .white
         datePicker.addTarget(self, action: #selector(EventDatePickerTableViewCell.dateChanged(datePicker:)), for: .valueChanged)
         
-        // datepicker toolbar setup
+        // Datepicker toolbar setup
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
         let space = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(EventDatePickerTableViewCell.doneDatePickerPressed))
+        let doneButton = UIBarButtonItem(title: Storyboard.datePickerDoneText, style: UIBarButtonItem.Style.done, target: self, action: #selector(EventDatePickerTableViewCell.doneDatePickerPressed))
         
-        // if you remove the space element, the "done" button will be left aligned
-        // you can add more items if you want
+        // Add the space so that doneButton is right-aligned
         toolBar.setItems([space, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         toolBar.sizeToFit()
         
         timeTextField.inputAccessoryView = toolBar
-        
     }
     
     @objc func doneDatePickerPressed() {
@@ -91,11 +91,4 @@ class EventDatePickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     @objc func dateChanged(datePicker: UIDatePicker) {
         setText(withDate: datePicker.date)
     }
-
-    /*
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        //timeTextField.becomeFirstResponder()
-    }
-    */
 }

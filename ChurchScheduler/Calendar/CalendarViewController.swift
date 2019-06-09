@@ -64,7 +64,6 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
                 DispatchQueue.main.async {
                     self.calendarView.reloadData()
                 }
-                //self.calendarView.setNeedsDisplay()
 
             } catch let parsingError {
                 print ("Error")
@@ -101,22 +100,6 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     // MARK: - Model
     
-    /*
-    // https://www.raywenderlich.com/567-urlsession-tutorial-getting-started
-    lazy var downloadsSession: URLSession = {
-        let configuration = URLSessionConfiguration.default
-        return URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
-    }()
-    
-    var dataTask: URLSessionDataTask?
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        print("Finished downloading to \(location)")
-    }
- 
- */
-    
-    //var calendarManager: CalendarManager?
     var eventList = EventList()
     var thisDaysEvents = [Event]()
     var dates = [Date]()

@@ -6,6 +6,8 @@
 //  Copyright © 2019 Jonathan Wheeler. All rights reserved.
 //
 
+// TODO: Buggy. Try re-creating from scratch before final submission.
+
 import UIKit
 
 class EventLocationTableViewCell: UITableViewCell {
