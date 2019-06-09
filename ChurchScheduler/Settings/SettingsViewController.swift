@@ -11,12 +11,21 @@ import UserNotifications
 
 class SettingsViewController: UITableViewController, UITextFieldDelegate {
 
+    private struct NotificationConstants {
+        static var identifier: String = "UYLLocalNotification"
+        static var title: String = "Delayed notification"
+    }
+    
+    private struct Storyboard {
+        static var title: String = "Settings"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.title = Storyboard.title
         nameTextArea.delegate = self
         let defaults = UserDefaults.standard
-        nameTextArea.text = defaults.string(forKey: "UserName")
+        nameTextArea.text = Globals.userName
         
         for cell in [notifyNowCell, notifyLaterCell] {
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.handleTap(sender:)))
@@ -42,13 +51,17 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func didFinishEditing(_ sender: UITextField) {
         if let userName = sender.text {
-            UserDefaults.standard.set(userName, forKey: "UserName")
+            Globals.userName = userName
         }
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return (indexPath.section == 2) ? indexPath : nil
     }
+    
+    /* Was infeasible to wait for an event during the demo, so
+     instead had a feature for demonstration where you can schedule a
+     user notification 5 or 60 seconds in the future */
     
     @IBOutlet weak var notifyNowCell: UIView!
     @IBOutlet weak var notifyLaterCell: UIView!
@@ -84,17 +97,4 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
             }
         })
     }
-    
-    private struct NotificationConstants {
-        static var identifier: String = "UYLLocalNotification"
-        static var title: String = "Delayed notification"
-    }
-    
-    private struct Storyboard {
-        static var title: String = "Settings"
-    }
-
 }
-
-
-

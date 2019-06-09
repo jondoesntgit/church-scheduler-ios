@@ -9,35 +9,48 @@
 import UIKit
 
 class CalendarViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, URLSessionDownloadDelegate {
+    
+    private struct Storyboard {
+        static let showEventDetails = "Show Event Details"
+        static let dayViewCell = "Day View Cell"
+        static let eventRow = "Event Row"
+    }
+    
+    private struct Constants {
+        static let navigationControllerTitle = "Calendar"
+    }
 
     @IBOutlet weak var currentMonthLabel: UILabel!
     @IBAction func didTouchNextMonth(_ sender: UIButton) {
+        if activeMonth.month! == 12 {
+            activeMonth.month! = 1
+            activeMonth.year! += 1
+        } else {
+            activeMonth.month! += 1
+        }
     }
     @IBAction func didTouchPreviousMonth(_ sender: UIButton) {
+        if activeMonth.month == 1 {
+            activeMonth.month! = 12
+            activeMonth.year! -= 1
+        } else {
+            activeMonth.month! -= 1
+        }
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.title = "Calendar"
-        //downloadService.downloadSession = downloadSession
+    
+        self.navigationController?.title = Constants.navigationControllerTitle
         
-        /*do {
-            self.calendarManager = try CalendarManager(urlString: , delegate: self)
-        } catch CalendarManagerError.InvalidURL {
-            print("urlString for calendar manager is bad")
-        } catch {
-            print("Some other error")
-        }*/
-        
-        guard let url = URL(string: "http://s3.jamwheeler.com/mvj_scheduler/data2.json") else { print ("DOES NOT WORK"); return}
+        let url = Globals.dataSourceURL
         
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             print("Starting task")
             print(url)
             if data == nil {
-                print(data as Any)
-                //throw CalendarManagerError.noDataReturned
+                print("No usable data")
                 return
             }
             do {
@@ -59,11 +72,15 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
         task.resume()
         
-        setActiveDate(Date())
+        let currentDate = Date()
         
-        self.currentMonthLabel.text = "June 2019"
+        activeMonth = Calendar.current.dateComponents([.year, .month], from: currentDate)
+        fillDatesForCurrentMonth()
+        setActiveDate(currentDate)
+        
         
         // Get current month
+        /*
         let nowComponents = Calendar.current.dateComponents([.year, .month, .day], from: Date())
         var firstDayOfCurrentMonth = nowComponents
         firstDayOfCurrentMonth.day = 1
@@ -71,17 +88,27 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         let firstDateOfCurrentMonthWeekday = Calendar.current.component(.weekday, from: firstDateOfCurrentMonth)
         let numberOfDaysToShowInPreviousMonth = firstDateOfCurrentMonthWeekday - 1
         let firstDateOfCalendar = firstDateOfCurrentMonth.addingTimeInterval(Double(-86400 * numberOfDaysToShowInPreviousMonth))
-        var workingDate = firstDateOfCalendar
+ */
+        //var workingDate = activeDate.firstSundayForCalendarView()
         
-        let numberOfDaysToDisplay = 6 * 7 // 42
+        
+    }
+    
+    func fillDatesForCurrentMonth() {
+        dates = []
+        var components = activeMonth!
+        components.day = 1
+        //let firstDayOfMonth = Calendar.current.nextDate(after: self, matching: activeMonth, matchingPolicy: .previousTimePreservingSmallerComponents, direction: .backward)!
+        let firstDayOfMonth = Calendar.current.date(from: components)!
+        let firstSundayOfMonth = Calendar.current.date(bySetting: .weekday, value: 1, of: firstDayOfMonth)!
+        let firstSundayOfCalendar = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: firstSundayOfMonth, wrappingComponents: false)!
+        var workingDate = Calendar.current.startOfDay(for: firstSundayOfCalendar)
+
+        let numberOfDaysToDisplay = 6 * 7 // six weeks, 42 days
         for _ in 1...numberOfDaysToDisplay {
-            // TODO: Cleanup if this turns out not to be necessary
-            //let dateForView = Calendar.current.component(.day, from: workingDate)
-            //dates.append(dateForView)
             dates.append(workingDate)
-            workingDate.addTimeInterval(86400)
+            workingDate = workingDate.nextDay()
         }
-        
     }
     
     // Make sure everything is up-to-date when we exit the detail MVC
@@ -109,7 +136,19 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     var thisDaysEvents = [Event]()
     var dates = [Date]()
     var activeDate = Date().roundedToDay()
-    var displayMonth = 6
+    var activeMonth: DateComponents! {
+        didSet {
+            fillDatesForCurrentMonth()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM YYYY"
+            let activeMonthAsDate = Calendar.current.date(from: activeMonth)!
+            currentMonthLabel.text = dateFormatter.string(from: activeMonthAsDate)
+            calendarView.reloadData()
+            calendarView.setNeedsLayout()
+            calendarView.setNeedsDisplay()
+            setActiveDate(activeMonthAsDate)
+        }
+    }
     
     
     // Mark: - Collection View
@@ -121,12 +160,11 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("numitems")
         return dates.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Day View Cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.dayViewCell, for: indexPath)
         if let calendarDayView = cell as? CalendarDayView {
 
             let index = indexPath.item
@@ -134,7 +172,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
             let date = dates[index].roundedToDay()
             calendarDayView.date = date
             calendarDayView.events = eventList.getEventsSameDayAs(date)
-            calendarDayView.isInDisplayMonth = (date.month == displayMonth)
+            calendarDayView.isInDisplayMonth = (date.month == activeMonth.month)
         }
         return cell
     }
@@ -185,17 +223,15 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let row = indexPath.row
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Event Row", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.eventRow, for: indexPath)
         let event = thisDaysEvents[row]
         cell.textLabel?.text = event.name
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //activeDate.formatter
-        //let dateString = "selected date"
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd"
+        dateFormatter.dateFormat = "MMM d"
         let dateString = dateFormatter.string(from: activeDate)
         return "Events for \(dateString)"
     }
@@ -216,7 +252,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
 
     //In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier! == "Show Event Details" {
+        if segue.identifier! == Storyboard.showEventDetails {
             if let eventInspector = segue.destination.contents as? EventInspector {
                 if let cell = sender as? UITableViewCell, let indexPath = eventTableView.indexPath(for: cell) {
                     let event = thisDaysEvents[indexPath.row]
@@ -225,8 +261,6 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
                 }
             }
         }
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
 }
 
@@ -237,23 +271,5 @@ extension UIViewController {
         } else {
             return self
         }
-    }
-}
-
-extension Date {
-    func roundedToDay() -> Date {
-        let dayComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
-        return Calendar.current.date(from: dayComponents)!
-    }
-    
-    var month: Int {
-        get {
-            return Calendar.current.component(.month, from: self)
-        }
-    }
-    
-    init(year: Int, month: Int, day: Int) {
-        let dayComponents = DateComponents(year: year, month: month, day: day)
-        self = Calendar.current.date(from: dayComponents)!
     }
 }

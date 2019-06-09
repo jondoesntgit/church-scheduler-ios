@@ -15,6 +15,7 @@
 		13876FC322A87F5D0036F0FA /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13876FC222A87F5D0036F0FA /* Globals.swift */; };
 		503BD34222A737FD0036C8CD /* DatePickerWithCloseButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD34122A737FD0036C8CD /* DatePickerWithCloseButtons.swift */; };
 		503BD34422A76DAB0036C8CD /* SimpleDoesItViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD34322A76DAB0036C8CD /* SimpleDoesItViewController.swift */; };
+		503BD34B22AD41630036C8CD /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503BD34A22AD41630036C8CD /* DateExtensions.swift */; };
 		503EA25322A4D6F9007EEF2A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503EA25222A4D6F9007EEF2A /* MapViewController.swift */; };
 		5043D42D22A6325B00BC48CD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5043D42C22A6325A00BC48CD /* SettingsViewController.swift */; };
 		5043D42F22A63C4D00BC48CD /* EventTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5043D42E22A63C4D00BC48CD /* EventTitleCell.swift */; };
@@ -41,6 +42,7 @@
 		13876FC222A87F5D0036F0FA /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		503BD34122A737FD0036C8CD /* DatePickerWithCloseButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerWithCloseButtons.swift; sourceTree = "<group>"; };
 		503BD34322A76DAB0036C8CD /* SimpleDoesItViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDoesItViewController.swift; sourceTree = "<group>"; };
+		503BD34A22AD41630036C8CD /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		503EA25222A4D6F9007EEF2A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5043D42C22A6325A00BC48CD /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5043D42E22A63C4D00BC48CD /* EventTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTitleCell.swift; sourceTree = "<group>"; };
@@ -71,10 +73,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		503BD34522AD3E230036C8CD /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				507BBFAB229B7F16000FE12E /* CalendarDayView.swift */,
+				1370AECC229DE1FB00B33B64 /* CalendarView.swift */,
+				507BBFA32298CDBD000FE12E /* CalendarViewController.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		503BD34622AD3E640036C8CD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5043D42C22A6325A00BC48CD /* SettingsViewController.swift */,
+				503BD34322A76DAB0036C8CD /* SimpleDoesItViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		503BD34722AD3E9B0036C8CD /* Event Inspector */ = {
+			isa = PBXGroup;
+			children = (
+				503EA25222A4D6F9007EEF2A /* MapViewController.swift */,
+				1370AECE229DE96C00B33B64 /* EventInspector.swift */,
+				5043D43222A65DAB00BC48CD /* EventLocationTableViewCell.swift */,
+				5043D42E22A63C4D00BC48CD /* EventTitleCell.swift */,
+				5043D43022A63D3E00BC48CD /* EventDatePickerTableViewCell.swift */,
+				503BD34122A737FD0036C8CD /* DatePickerWithCloseButtons.swift */,
+				50CAFDF522A5F5EE00AB5F7B /* ComponentEditorViewController.swift */,
+				1370AED0229DEE8400B33B64 /* EventPropertyTableViewCell.swift */,
+			);
+			path = "Event Inspector";
+			sourceTree = "<group>";
+		};
+		503BD34822AD3ECA0036C8CD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1366DC8E22A1F0F9004DDE1B /* CalendarManager.swift */,
+				5059E5F1229CC7670089E3E7 /* EventList.swift */,
+				5059E5F3229CC7A80089E3E7 /* Event.swift */,
+				1366DC8C22A1D919004DDE1B /* EventComponent.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		503BD34922AD3EFB0036C8CD /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				507BBFA52298CE84000FE12E /* Grid.swift */,
+				503BD34A22AD41630036C8CD /* DateExtensions.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		507BBF832298C2D6000FE12E = {
 			isa = PBXGroup;
 			children = (
-				13876FC222A87F5D0036F0FA /* Globals.swift */,
 				507BBF8E2298C2D6000FE12E /* ChurchScheduler */,
 				507BBF8D2298C2D6000FE12E /* Products */,
 			);
@@ -91,29 +146,17 @@
 		507BBF8E2298C2D6000FE12E /* ChurchScheduler */ = {
 			isa = PBXGroup;
 			children = (
-				5043D42C22A6325A00BC48CD /* SettingsViewController.swift */,
-				1366DC8E22A1F0F9004DDE1B /* CalendarManager.swift */,
 				507BBF8F2298C2D7000FE12E /* AppDelegate.swift */,
-				507BBFAB229B7F16000FE12E /* CalendarDayView.swift */,
-				1370AECC229DE1FB00B33B64 /* CalendarView.swift */,
-				507BBFA32298CDBD000FE12E /* CalendarViewController.swift */,
-				5059E5F1229CC7670089E3E7 /* EventList.swift */,
-				5059E5F3229CC7A80089E3E7 /* Event.swift */,
-				1366DC8C22A1D919004DDE1B /* EventComponent.swift */,
+				13876FC222A87F5D0036F0FA /* Globals.swift */,
 				507BBF932298C2D7000FE12E /* Main.storyboard */,
-				503BD34322A76DAB0036C8CD /* SimpleDoesItViewController.swift */,
-				503EA25222A4D6F9007EEF2A /* MapViewController.swift */,
-				1370AECE229DE96C00B33B64 /* EventInspector.swift */,
-				5043D43222A65DAB00BC48CD /* EventLocationTableViewCell.swift */,
-				5043D42E22A63C4D00BC48CD /* EventTitleCell.swift */,
-				5043D43022A63D3E00BC48CD /* EventDatePickerTableViewCell.swift */,
-				503BD34122A737FD0036C8CD /* DatePickerWithCloseButtons.swift */,
-				50CAFDF522A5F5EE00AB5F7B /* ComponentEditorViewController.swift */,
-				1370AED0229DEE8400B33B64 /* EventPropertyTableViewCell.swift */,
-				507BBF962298C2DA000FE12E /* Assets.xcassets */,
+				503BD34622AD3E640036C8CD /* Settings */,
+				503BD34522AD3E230036C8CD /* Calendar */,
+				503BD34822AD3ECA0036C8CD /* Models */,
+				503BD34722AD3E9B0036C8CD /* Event Inspector */,
 				507BBF982298C2DA000FE12E /* LaunchScreen.storyboard */,
-				507BBFA52298CE84000FE12E /* Grid.swift */,
+				503BD34922AD3EFB0036C8CD /* Utilities */,
 				507BBF9B2298C2DA000FE12E /* Info.plist */,
+				507BBF962298C2DA000FE12E /* Assets.xcassets */,
 			);
 			path = ChurchScheduler;
 			sourceTree = "<group>";
@@ -203,6 +246,7 @@
 				5043D43322A65DAC00BC48CD /* EventLocationTableViewCell.swift in Sources */,
 				1370AECD229DE1FB00B33B64 /* CalendarView.swift in Sources */,
 				503EA25322A4D6F9007EEF2A /* MapViewController.swift in Sources */,
+				503BD34B22AD41630036C8CD /* DateExtensions.swift in Sources */,
 				5043D42D22A6325B00BC48CD /* SettingsViewController.swift in Sources */,
 				507BBFA42298CDBE000FE12E /* CalendarViewController.swift in Sources */,
 				503BD34222A737FD0036C8CD /* DatePickerWithCloseButtons.swift in Sources */,

@@ -88,7 +88,7 @@ class EventInspector: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Event Component", for: indexPath) as! EventPropertyTableViewCell
             let eventComponent = event.components[indexPath.row]
             cell.eventComponent = eventComponent
-            cell.accessoryType = .disclosureIndicator
+            cell.editingAccessoryType = .disclosureIndicator
             return cell
         }
         
