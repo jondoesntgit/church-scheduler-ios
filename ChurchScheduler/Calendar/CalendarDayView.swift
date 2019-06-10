@@ -27,7 +27,7 @@ class CalendarDayView: UICollectionViewCell {
     
     private struct Constants {
         static var spacingToDiameterRatio: CGFloat = 0.2
-        static var maxNumberOfDotsToShow = 4
+        static var maxNumberOfDotsToShow = 6
     }
     
     var dotWidth: CGFloat {
@@ -49,9 +49,6 @@ class CalendarDayView: UICollectionViewCell {
     override func draw(_ rect: CGRect) {
         dateLabel.textColor = isInDisplayMonth ? UIColor.black : UIColor.gray
         let numberOfEvents = events.count
-        if numberOfEvents > 0 {
-            ()
-        }
         
         for index in 0..<numberOfEvents {
             let startY = bounds.maxY - dotWidth - 5

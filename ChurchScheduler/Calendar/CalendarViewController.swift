@@ -19,6 +19,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     private struct Constants {
         static let navigationControllerTitle = "Calendar"
     }
+    
 
     @IBOutlet weak var currentMonthLabel: UILabel!
     @IBAction func didTouchNextMonth(_ sender: UIButton) {
@@ -48,10 +49,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
         let url = Globals.dataSourceURL
         
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
-            print("Starting task")
-            print(url)
             if data == nil {
-                print("No usable data")
+                self.offerToLoadDummyData(withTitle: "No Data Received")
                 return
             }
             do {
@@ -65,9 +64,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
                     self.calendarView.reloadData()
                 }
 
-            } catch let parsingError {
-                print ("Error")
-                print(parsingError)
+            } catch _ {
+                self.offerToLoadDummyData(withTitle: "Invalid JSON received")
             }
         }
         task.resume()
@@ -221,6 +219,39 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
             dates.append(workingDate)
             workingDate = workingDate.nextDay()
         }
+    }
+    
+    func offerToLoadDummyData(withTitle title: String) {
+        let alertMessage = UIAlertController(title: title, message: "Sorry, no data could be downloaded from the event server. Would you like to use some hard-coded data instead?", preferredStyle: .alert)
+        alertMessage.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        alertMessage.addAction(UIAlertAction(title: "OK", style: .default) { alertAction in
+            let eventOne = Event(name: "Hard-coded event 1")
+            let eventTwo = Event(name: "Hard-coded event 2")
+            let eventThree = Event(name: "Hard-coded event 3")
+            
+            eventOne.startTime = Date()
+            eventTwo.startTime = Date().addingTimeInterval(3600.0)
+            eventThree.startTime = Date().addingTimeInterval(86400.0)
+            
+            eventOne.components.append(EventComponent(withLeftText: "Part 1", withRightText: "Person 1", withCenterText: nil))
+            eventOne.components.append(EventComponent(withLeftText: "Part 2", withRightText: "Person 2", withCenterText: nil))
+            eventOne.components.append(EventComponent(withLeftText: "Part 3", withRightText: "Person 3", withCenterText: nil))
+            eventThree.components.append(EventComponent(withLeftText: "Segment 1", withRightText: "Person 1", withCenterText: nil))
+            
+            self.eventList.add(eventOne)
+            self.eventList.add(eventTwo)
+            self.eventList.add(eventThree)
+            DispatchQueue.main.async {
+                self.calendarView.reloadData()
+                for cell in self.calendarView.visibleCells {
+                    cell.setNeedsDisplay()
+                }
+                self.calendarView.setNeedsDisplay()
+                self.setActiveDate(self.activeDate)
+            }
+        })
+        
+        self.present(alertMessage, animated: true, completion: nil)
     }
     
     // MARK: - Navigation

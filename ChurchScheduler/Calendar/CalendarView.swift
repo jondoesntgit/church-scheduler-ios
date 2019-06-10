@@ -20,7 +20,6 @@ class CalendarView: UICollectionView {
     var activeCell : CalendarDayView?
     
     func setActiveCellByDate(_ date: Date) {
-        print(date)
         activeCell?.isActive = false
         for cell in visibleCells {
             if let calendarCell = cell as? CalendarDayView {

@@ -12,4 +12,11 @@ class EventComponent: Codable {
     var leftText: String?
     var rightText: String?
     var centerText: String?
+    
+    init(withLeftText leftText: String?, withRightText rightText: String?, withCenterText centerText: String?) {
+        self.leftText = leftText
+        self.rightText = rightText
+        self.centerText = centerText
+    }
+    
 }

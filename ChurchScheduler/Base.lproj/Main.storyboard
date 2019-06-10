@@ -555,31 +555,8 @@
                                     <outlet property="timeTextField" destination="Uvi-Yc-aDF" id="A7x-aC-sik"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Event Map Picker" id="s8o-s1-qa1" customClass="EventLocationTableViewCell" customModule="ChurchScheduler" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="116" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s8o-s1-qa1" id="XAS-YY-qTn" customClass="EventLocationTableViewCell" customModule="ChurchScheduler" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7re-zJ-tWX">
-                                            <rect key="frame" x="22" y="11.333333333333336" width="66" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="7re-zJ-tWX" firstAttribute="centerY" secondItem="XAS-YY-qTn" secondAttribute="centerY" id="FNy-6E-C74"/>
-                                        <constraint firstItem="7re-zJ-tWX" firstAttribute="leading" secondItem="XAS-YY-qTn" secondAttribute="leadingMargin" constant="2" id="i1i-WD-3la"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="0a7-h0-LUT" kind="presentation" identifier="Show Map Details" id="XxA-12-iFd"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Event Component" rowHeight="70" id="5xs-hY-h1y" customClass="EventPropertyTableViewCell" customModule="ChurchScheduler" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="160" width="414" height="70"/>
+                                <rect key="frame" x="0.0" y="116" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5xs-hY-h1y" id="yIo-CP-LQ7">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="69.666666666666671"/>
@@ -624,6 +601,32 @@
                                     <outlet property="leftLabel" destination="K3f-mg-4Au" id="gzF-Sb-Cxr"/>
                                     <outlet property="rightLabel" destination="fTO-GK-7oA" id="7Ek-HT-7qL"/>
                                     <segue destination="dIW-ye-X3V" kind="presentation" identifier="Edit Component Information" id="sQE-Rh-Bct"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Event Map Picker" id="zDc-Df-pPi" customClass="EventLocationTableViewCell" customModule="ChurchScheduler" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="186" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zDc-Df-pPi" id="Jx7-Qr-gat">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yG8-KD-iav">
+                                            <rect key="frame" x="20" y="11" width="65.666666666666671" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="b18-yk-XZN"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yG8-KD-iav" firstAttribute="leading" secondItem="Jx7-Qr-gat" secondAttribute="leadingMargin" id="MQg-vL-KRy"/>
+                                        <constraint firstItem="yG8-KD-iav" firstAttribute="top" secondItem="Jx7-Qr-gat" secondAttribute="topMargin" id="b6H-lT-KxX"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="0a7-h0-LUT" kind="presentation" identifier="Show Map Details" id="TIl-6l-mBP"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
