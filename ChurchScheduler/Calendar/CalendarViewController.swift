@@ -88,11 +88,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        for cell in calendarView.visibleCells {
-            cell.setNeedsDisplay()
-        }
         calendarView.setActiveCellByDate(activeDate)
-        calendarView.setNeedsDisplay()
     }
     
     
@@ -110,8 +106,6 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
             let activeMonthAsDate = Calendar.current.date(from: activeMonth)!
             currentMonthLabel.text = dateFormatter.string(from: activeMonthAsDate)
             calendarView.reloadData()
-            calendarView.setNeedsLayout()
-            calendarView.setNeedsDisplay()
             setActiveDate(activeMonthAsDate)
         }
     }
@@ -139,6 +133,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
             calendarDayView.date = date
             calendarDayView.events = eventList.getEventsSameDayAs(date)
             calendarDayView.isInDisplayMonth = (date.month == activeMonth.month)
+            calendarDayView.setNeedsDisplay()
         }
         return cell
     }

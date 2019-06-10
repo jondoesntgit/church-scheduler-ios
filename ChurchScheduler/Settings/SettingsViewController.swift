@@ -24,7 +24,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.navigationController?.title = Storyboard.title
         nameTextArea.delegate = self
-        let defaults = UserDefaults.standard
         nameTextArea.text = Globals.userName
         
         for cell in [notifyNowCell, notifyLaterCell] {
