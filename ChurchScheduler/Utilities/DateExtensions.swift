@@ -13,15 +13,7 @@ extension Date {
     // Dates contain a lot of precision. This is a useful utility function for checking
     // if two dates are on the same day, by "rounding" them to a day.
     func roundedToDay() -> Date {
-        // Found a faster way to do this:
-        
         return Calendar.current.startOfDay(for: self)
-        
-        
-        /*
-        let dayComponents = Calendar.current.dateComponents([.year, .month, .day], from: self)
-        return Calendar.current.date(from: dayComponents)!
-        */
     }
     
     // Pulls the month out of the date.
