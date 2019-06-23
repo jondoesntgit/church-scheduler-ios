@@ -59,7 +59,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.handleLongPress(_:)))
         longPressRecognizer.minimumPressDuration = Constants.minimumPressDuration
-        mapView.addGestureRecognizer(longPressRecognizer)
+        
+        // Only allow user to set location if they are an Admin
+        if Globals.isAdmin {
+            mapView.addGestureRecognizer(longPressRecognizer)
+        }
         mapView.mapType = MKMapType.standard
         
         //https://stackoverflow.com/a/25698536/3635467

@@ -1,0 +1,59 @@
+user:jamwheel (Wheeler, Jonathan)
+
+Installation:
+
+No special installation instructions are needed to run. This app requires iPhone (does not support iPad yet), and only runs in portrait mode. It prompts the user in the first usage to ask for permission to send notifications.
+
+Usage:
+
+This is an iPhone-only app that I am building for my church. 
+
+The app downloads a static JSON file from the internet (which currently, is hardcoded into a private struct). The app parses this JSON file and extracts information about different church functions and renders them in a calendar view. If you disable the network, you will get a User Alert asking if you want to let the app render some hard-coded sample events.
+
+The user can navigate through different months, and select dates to see events in that date. Events colored in blue are events for which the user is not actively part of the program. Green dots indicate that the user is involved in this program (the app checks this by looking through the event program for the user's name, which can be set in the settings tab). To make an event green, tap on the event title in the Table View on the Calendar MVC. Look at the bottom of the event on the right-hand side, it will show something like "Person 1." Then, click "back" until you can switch over to the Settings tab, and enter in the exact name (with no extra spaces at the end) in the User Name field at the top. Then, when you look at the calendar view, you should see green circles instead of blue circles for that event, and all other events where that user is listed in the program.
+ 
+A program can be selected by tapping on the name of the program in the title view below the calendar. If the user is an admin (currently can toggle in the settings page), they can edit the parts of the program (start time, end time, location, and components of the program). Otherwise, all of the event properties are read-only. Admins can also delete components of the program.
+
+To test this functionality out, in the settings tab, enable the "Is Admin" slider. Then, go to the calendar view, tap on an event, and click "Edit." You should be able to edit the title by tapping on it (and see these changes in the Calendar View MVC on top of it), change the start date, set or edit the end date, change parts of the program (including left text, right text, and center text). You can also set the location in the Map View by long-tapping a location in the map view and setting an annotation.
+
+There will eventually be notifications that go off in order to remind users about events, but it is difficult to demonstrate this during demo/grading, so this feature is mocked in the settings page. In the settings tab, tap on "Notify in 5 seconds" and quickly switch out of the app. You should get a notification from the app in 5 seconds.
+
+A WebKitView is provided to link users to my developer website, available in the Settings page. Tap on the "SimpleDoesIt" link and see a website load.
+
+
+------------
+Self-grading
+------------
+
+Coding Breadth (21-24 points):
+    UIBezier (1 point) [In the CalendarDayView drawing code]
+    Labels, buttons, switches, datepicker (2 points) [Throughout]
+    Table view (1-2 points) [Throughout]
+    Gesture recognizer (1 point) [Map view, calendar view controller]
+    Date components (2 points) (including +1 point NCIL) [Calendar view controller]
+    Collection view (1 point) [Calendar view controller]
+    Segue/Unwind (1 point) [Event Inspector, Map View]
+    UI Navigation view (1 point) [Throughout]
+    Mapkit (2 points) (including +1 point NCIL) [Map View]
+    Codable (1 point) [The model gets loaded over JSON, with some custom initializers that override the Codable defaults]
+    WebKitView (2 points) (including +1 point NCIL) [Settings page]
+    Notifications (2 points) (including +1 point NCIL) [Settings page]
+    User settings (1 point) [Globals]
+    URL Session (1 point) NCIL (maxed out) [Calendar View Controller]
+    App icon, launch image (1-2 points)
+    Miscellaneous API (1-2 points)
+        - UI Alert
+        - Other small things throughout ("the rubric says students sometimes earn a point here without realizing it")
+
+Overall Development (14-19 points):
+    Creativity (2-3 points)
+    UI Design (1-3 points)
+    Coding Style (2-3 points)
+    Stability and Usability (1-2 points)
+    Proposal (2 points)
+    Checkpoint (2 points)
+    Presentation (2 points)
+    Late days (2 total points for 2 total late days)
+
+Total expected score: 35-43 points
+Taking course pass/fail, so just want to pass, which I think thresholds at around a 30.
