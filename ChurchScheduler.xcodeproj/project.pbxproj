@@ -202,6 +202,7 @@
 				TargetAttributes = {
 					507BBF8B2298C2D6000FE12E = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -416,7 +417,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.edu.cs193p.jamwheel.MVJ-Calendar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -435,7 +436,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.stanford.edu.cs193p.jamwheel.MVJ-Calendar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
